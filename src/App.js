@@ -80,7 +80,7 @@ function checkHandler(){
           <div className="relative flex items-center justify-center flex-col my-2">
           <input
             type="text"
-            className="border-2 w-5/6 mx-auto p-2 rounded-2xl  "
+            className="border-2 w-5/6 mx-auto p-2 rounded-2xl pr-10 "
             value={input}
             placeholder="Enter Text"
             onChange={(event) => setintput(event.target.value)}
