@@ -31,7 +31,6 @@ function App() {
 
   function addHandler() {
     settodos(prevTodos => [...prevTodos, {input, isCompleted: false}]);
-    console.log(todos);
   setintput("");
 
   }
@@ -51,6 +50,7 @@ function App() {
     else if(value===0) {
       isConfirmed = window.confirm('Are you sure you want to edit?');
       message1 = "Editing canceled."
+      
     }
     else {
       isConfirmed = true;
@@ -63,6 +63,7 @@ function App() {
     } 
     else {
       alert(message1);
+      if(value===0) return -1;
     }
     
   }
@@ -73,10 +74,8 @@ function App() {
     });
   }                 
   function editHandler(item){
-
-    console.log(item.input);
-    setintput(item.input);
-    deleteHandler(item,0);
+     let x = deleteHandler(item,0);
+     if (x!==-1)setintput(item.input);
   }
 function checkHandler(){
   setchecked(!checked);
