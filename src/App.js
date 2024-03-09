@@ -43,14 +43,17 @@ function App() {
   }
 
   function deleteHandler(item) {
-    // console.log("clicked");
-    // console.log(event.target);
-    console.log("indelet");
-    console.log(item);
-    settodos(prevTodos => {
-      const updatedTodos = prevTodos.filter((todo) => item.input !== todo.input);
-      return updatedTodos;
-    });
+    const isConfirmed = window.confirm('Are you sure you want to delete?');
+    if(isConfirmed){
+      settodos(prevTodos => {
+        const updatedTodos = prevTodos.filter((todo) => item.input !== todo.input);
+        return updatedTodos;
+      });
+    } 
+    else {
+      alert('Deletion canceled.');
+    }
+    
   }
   function deletefinishedHandler(item) {
     setfinished(prevfinished => {
@@ -128,8 +131,7 @@ function checkHandler(){
           
         </div>
       </div>
-      {/* <button className="absolute right-8"  onClick={deleteHandler} name = "asd"><IoMdAddCircle onClick={deleteHandler} name = "asd" className="text-4xl "/>delete</button>
-      <button className="absolute top-0" onClick={addHandler}><IoMdAddCircle className="text-4xl "/>delete</button> */}
+    
     </div>
   );
 }
