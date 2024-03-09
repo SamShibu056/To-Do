@@ -35,9 +35,9 @@ function App() {
   setintput("");
 
   }
-  function doneHandler(event){
-     deleteHandler(event);
-     setfinished(prevFinished => [...prevFinished, {input: event.target.name, iscompleted: true}]);
+  function doneHandler(item){
+     deleteHandler(item);
+     setfinished(prevFinished => [...prevFinished, {input: item.input, iscompleted: true}]);
 
 
   }
@@ -52,9 +52,9 @@ function App() {
       return updatedTodos;
     });
   }
-  function deletefinishedHandler(event) {
+  function deletefinishedHandler(item) {
     setfinished(prevfinished => {
-      const updatedfinished = prevfinished.filter((todo) => event.target.name !== todo.input);
+      const updatedfinished = prevfinished.filter((todo) => item.input !== todo.input);
       return updatedfinished;
     });
   }                 
@@ -67,24 +67,24 @@ function checkHandler(){
   setchecked(!checked);
 }
   return (
-    <div className=" text-[#00adb5] App flex flex-col gap-5 justify-center items-center	w-screen h-screen bg-[#222831]">
+    <div className="  App flex flex-col gap-5 justify-center items-center	w-screen h-screen bg-white">
       {/* <Navbar /> */}
       <h1 className="font-extrabold text-2xl">TO-DO LIST</h1>
-      <div className=" border-red-400 border-2  box1 flex justify-center items-center flex-col w-96 p-5 rounded-lg">
+      <div className="  border-2  box1 flex justify-center items-center flex-col w-96 p-5 rounded-lg shadow-2xl">
       <h2 className="text-xl my-2 ">Add a todo</h2>
         <div className="h-96 flex flex-col w-full">
           
           <div className="relative flex items-center justify-center flex-col my-2">
           <input
             type="text"
-            className="border-2 w-5/6 mx-auto p-2 rounded-2xl  bg-[#222831]"
+            className="border-2 w-5/6 mx-auto p-2 rounded-2xl  "
             value={input}
             placeholder="Enter Text"
             onChange={(event) => setintput(event.target.value)}
             
           />
           <button className="absolute right-8" onClick={addHandler}>
-          <IoMdAddCircle className="text-4xl text-[#00adb5]"/>
+          <IoMdAddCircle className="text-4xl "/>
           </button>
           </div>
           
@@ -95,39 +95,41 @@ function checkHandler(){
           </div>
           
           
-          <div className="flex gap-5 flex-col ">
+          <div className="flex gap-5 flex-col overflow-y-auto ">
             {
             checked ? (
               finished && finished.map((item,index)=>
                  (
-                  <div className="w-full flex gap-10 border-2 min-h-10 bg-[#222831] items-center" key={index}> 
-                    <div>{item.input}</div>
-                    <button className=""  name= {item.input} onClick={deletefinishedHandler} > delete</button>
+                  <div className="justify-start w-full flex   bg-white items-center rounded-lg shadow-md hover:shadow-lg hover:border-black border-solid border transition-all" key={index}> 
+                    <div className="mr-auto min-h-20 flex items-center max-w-48	">{item.input}</div>
+                    <button className=""  name= {item.input} onClick={() => deletefinishedHandler(item)} > <MdDeleteForever className="text-3xl "/></button>
                   </div>
                  )
               )
             ):(
               todos && todos.map((item,index)=>
                  (
-                  <div className="w-full flex gap-10 border-2 min-h-10 bg-[#222831] items-center" key={index}> 
-                    <input type="checkbox" onChange={doneHandler} name= {item.input} checked= {item.isCompleted} />
-                    <div>{item.input}</div>
-                    <button  onClick={() => editHandler(item)}className=""  name= {item.input} ><FaRegEdit className="text-4xl text-[#00adb5]"/></button>
+                  <div className="justify-start w-full flex   bg-white items-center rounded-lg shadow-md hover:shadow-lg hover:border-black border-solid border transition-all" key={index}> 
+                    <input type="checkbox" className="mx-3" onChange={() => doneHandler(item)} name= {item.input} checked= {item.isCompleted} />
+                    <div className="mr-auto min-h-20 flex items-center max-w-48	">{item.input}</div>
+                    <button  onClick={() => editHandler(item)} className="ml-auto"  name= {item.input} ><FaRegEdit className=" text-3xl "/></button>
                     <button className=""  onClick={() => deleteHandler(item)} name={item.input}>
-                    <MdDeleteForever className="text-4xl text-[#00adb5]"/>
-
+                    <MdDeleteForever className="text-3xl "/>
+                
                   </button>
                   </div>
                  )
               )
+              
             )
-            } 
+            }
+            <div></div> 
           </div>
           
         </div>
       </div>
-      {/* <button className="absolute right-8"  onClick={deleteHandler} name = "asd"><IoMdAddCircle onClick={deleteHandler} name = "asd" className="text-4xl text-[#00adb5]"/>delete</button>
-      <button className="absolute top-0" onClick={addHandler}><IoMdAddCircle className="text-4xl text-[#00adb5]"/>delete</button> */}
+      {/* <button className="absolute right-8"  onClick={deleteHandler} name = "asd"><IoMdAddCircle onClick={deleteHandler} name = "asd" className="text-4xl "/>delete</button>
+      <button className="absolute top-0" onClick={addHandler}><IoMdAddCircle className="text-4xl "/>delete</button> */}
     </div>
   );
 }
