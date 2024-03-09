@@ -108,7 +108,7 @@ function checkHandler(){
                     <button  onClick = {editHandler} className=""  name= {item.input} >button</button>
                     <button className=""  onClick={deleteHandler} name={item.input}>
                     delete
-                    <IoMdAddCircle className="text-4xl text-[#00adb5]"/>
+                    {/* <IoMdAddCircle className="text-4xl text-[#00adb5]"/> */}
                   </button>
                   </div>
                  )
