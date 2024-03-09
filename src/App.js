@@ -42,8 +42,14 @@ function App() {
 
   }
 
-  function deleteHandler(item) {
-    const isConfirmed = window.confirm('Are you sure you want to delete?');
+  function deleteHandler(item,value = 1 ) {
+    let isConfirmed = false;
+    if(value === 1){
+      isConfirmed = window.confirm('Are you sure you want to delete?');
+    }
+    else {
+      isConfirmed = window.confirm('Are you sure you want to edit?');
+    }
     if(isConfirmed){
       settodos(prevTodos => {
         const updatedTodos = prevTodos.filter((todo) => item.input !== todo.input);
@@ -62,9 +68,10 @@ function App() {
     });
   }                 
   function editHandler(item){
+
     console.log(item.input);
     setintput(item.input);
-    deleteHandler(item);
+    deleteHandler(item,0);
   }
 function checkHandler(){
   setchecked(!checked);
