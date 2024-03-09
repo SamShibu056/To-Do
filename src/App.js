@@ -36,7 +36,7 @@ function App() {
 
   }
   function doneHandler(item){
-     deleteHandler(item);
+     deleteHandler(item,2);
      setfinished(prevFinished => [...prevFinished, {input: item.input, iscompleted: true}]);
 
 
@@ -44,11 +44,16 @@ function App() {
 
   function deleteHandler(item,value = 1 ) {
     let isConfirmed = false;
+    let message1 = "Deletion canceled."
     if(value === 1){
       isConfirmed = window.confirm('Are you sure you want to delete?');
     }
-    else {
+    else if(value===0) {
       isConfirmed = window.confirm('Are you sure you want to edit?');
+      message1 = "Editing canceled."
+    }
+    else {
+      isConfirmed = true;
     }
     if(isConfirmed){
       settodos(prevTodos => {
@@ -57,7 +62,7 @@ function App() {
       });
     } 
     else {
-      alert('Deletion canceled.');
+      alert(message1);
     }
     
   }
