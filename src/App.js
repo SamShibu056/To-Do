@@ -1,6 +1,9 @@
 
 import {  useEffect, useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
+import { MdDeleteForever } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 function App() {
   const [input, setintput] = useState("");
   const [todos,settodos] = useState([]);
@@ -39,22 +42,26 @@ function App() {
 
   }
 
-  function deleteHandler(event) {
+  function deleteHandler(item) {
+    // console.log("clicked");
+    // console.log(event.target);
+    console.log("indelet");
+    console.log(item);
     settodos(prevTodos => {
-      const updatedTodos = prevTodos.filter((todo) => event.target.name !== todo.input);
+      const updatedTodos = prevTodos.filter((todo) => item.input !== todo.input);
       return updatedTodos;
     });
-
   }
   function deletefinishedHandler(event) {
     setfinished(prevfinished => {
       const updatedfinished = prevfinished.filter((todo) => event.target.name !== todo.input);
       return updatedfinished;
     });
-  }
-  function editHandler(event){
-    setintput(event.target.name);
-    deleteHandler(event);
+  }                 
+  function editHandler(item){
+    console.log(item.input);
+    setintput(item.input);
+    deleteHandler(item);
   }
 function checkHandler(){
   setchecked(!checked);
@@ -105,10 +112,10 @@ function checkHandler(){
                   <div className="w-full flex gap-10 border-2 min-h-10 bg-[#222831] items-center" key={index}> 
                     <input type="checkbox" onChange={doneHandler} name= {item.input} checked= {item.isCompleted} />
                     <div>{item.input}</div>
-                    <button  onClick = {editHandler} className=""  name= {item.input} >button</button>
-                    <button className=""  onClick={deleteHandler} name={item.input}>
-                    delete
-                    {/* <IoMdAddCircle className="text-4xl text-[#00adb5]"/> */}
+                    <button  onClick={() => editHandler(item)}className=""  name= {item.input} ><FaRegEdit className="text-4xl text-[#00adb5]"/></button>
+                    <button className=""  onClick={() => deleteHandler(item)} name={item.input}>
+                    <MdDeleteForever className="text-4xl text-[#00adb5]"/>
+
                   </button>
                   </div>
                  )
@@ -116,8 +123,11 @@ function checkHandler(){
             )
             } 
           </div>
+          
         </div>
       </div>
+      {/* <button className="absolute right-8"  onClick={deleteHandler} name = "asd"><IoMdAddCircle onClick={deleteHandler} name = "asd" className="text-4xl text-[#00adb5]"/>delete</button>
+      <button className="absolute top-0" onClick={addHandler}><IoMdAddCircle className="text-4xl text-[#00adb5]"/>delete</button> */}
     </div>
   );
 }
